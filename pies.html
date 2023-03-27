@@ -8,7 +8,6 @@
     <title>Pies | Bethany's Pie Shop</title>
   </head>
   <body>
-    <script></script>
     <header>
       <nav>
         <ul>
@@ -19,7 +18,6 @@
       </nav>
     </header>
     <main>
-      <script></script>
       <aside><img src="images/logo.png" alt="Bethany's Pie Shop" /></aside>
       <article>
         <h1>Pies</h1>
@@ -58,4 +56,28 @@
       </footer>
     </main>
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (e) {
+      const orderButtons = document.querySelectorAll("button[data-order]");
+
+      orderButtons.forEach(function (button) {
+        button.addEventListener("click", function (e) {
+          const button = e.currentTarget;
+          const container = button.parentNode;
+
+          const order = {
+            id: button.getAttribute("data-order"),
+            title: container.querySelector(".title").innerText,
+            price: container.querySelector(".price").innerText,
+            desc: container.querySelector(".desc").innerText,
+          };
+
+          localStorage.setItem("order", JSON.stringify(order));
+
+          const url = window.location.href.replace("pies.html", "order.html");
+          window.location.href = url;
+        });
+      });
+    });
+  </script>
 </html>
